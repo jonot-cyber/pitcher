@@ -27,7 +27,7 @@ jobs:
     - name: Create dist
       run: mkdir dist
     - name: Run on test.md
-      run: go run . test.md > dist/index.html
+      run: go run . README.md > dist/index.html
     - name: Setup Pages
       uses: actions/configure-pages@v2
     - name: Upload artifact
