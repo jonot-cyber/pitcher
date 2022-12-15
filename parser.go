@@ -99,7 +99,7 @@ func Parse(markdown io.Reader) {
 
 func parseSection(section []string, i int) (string, string) {
     title := parseTitle(section[0])
-    return fmt.Sprintf(`<div id="%d"><h1>%s</h1><section>%s</section></div>`, i, title, parseRest(section[1:])), title
+    return fmt.Sprintf(`<div id="%d" class="invisible"><h1>%s</h1><section>%s</section></div>`, i, title, parseRest(section[1:])), title
 }
 
 func parseRest(section []string) string {
