@@ -79,6 +79,7 @@ func Parse(markdown io.Reader) {
         }
         section = append(section, scanner.Text())
     }
+    sections = append(sections, section)
 
     if err := scanner.Err(); err != nil {
         log.Fatal(err)
