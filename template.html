@@ -35,12 +35,20 @@ h1 {
             let slideID = 0;
 
             function refresh(id) {
-                let nodes = document.querySelectorAll("div");
+                let nodes = document.querySelectorAll("div")
+                if (slideID > nodes.length - 1) {
+                    slideID--
+                    return
+                }
+                if (slideID < 0) {
+                    slideID = 0
+                    return
+                }
                 for (let node of nodes) {
                     if (node.getAttribute("id") == id) {
-                        node.classList.remove("invisible");
+                        node.classList.remove("invisible")
                     } else {
-                        node.classList.add("invisible");
+                        node.classList.add("invisible")
                     }
                 }
             }
