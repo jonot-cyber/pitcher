@@ -19,6 +19,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
+    defer f.Close()
     markdown, err := io.ReadAll(f)
     if err != nil {
         log.Fatal(err)
