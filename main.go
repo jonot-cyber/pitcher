@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+    flag.Parse()
     args := flag.Args()
     if len(args) != 1 {
         log.Fatalln("You need to select a file!")
