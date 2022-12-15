@@ -64,7 +64,7 @@ var linkRegex = regexp.MustCompile(`\[(.*)\]\((.*)\)`)
 var boldRegex = regexp.MustCompile(`\*\*(.*)\*\*`)
 var italicRegex = regexp.MustCompile(`_(.*)_|\*(.*)\*`)
 var codeRegex = regexp.MustCompile("`(.*)`")
-var listItemRegex = regexp.MustCompile(`^\w*- (.*)$`)
+var listItemRegex = regexp.MustCompile(`^\s*- (.*)$`)
 
 func Parse(markdown io.Reader) {
     var sections [][]string
