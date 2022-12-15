@@ -1,6 +1,7 @@
 # pitcher
 
 **pitcher** - a presentation generator by `jonot-cyber`
+![Pitcher Logo](https://github.com/jonot-cyber/pitcher/blob/main/logo.png?raw=true)
 
 [Try it Live!](https://jonot.me/pitcher)
 [Github Link](https://github.com/jonot-cyber/pitcher)
