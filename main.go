@@ -2,8 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"io"
 	"log"
 	"os"
 )
@@ -20,9 +18,6 @@ func main() {
         log.Fatal(err)
     }
     defer f.Close()
-    markdown, err := io.ReadAll(f)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Println(string(markdown))
+
+    Parse(f)
 }
