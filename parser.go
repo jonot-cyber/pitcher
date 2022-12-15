@@ -2,12 +2,16 @@ package main
 
 import (
 	"bufio"
+	_ "embed"
 	"fmt"
 	"io"
 	"log"
 	"regexp"
 	"strings"
 )
+
+//go:embed template.html
+var template string
 
 var headerRegex = regexp.MustCompile("^# (.*)$")
 var imageRegex = regexp.MustCompile(`!\[(.*)\]\((.*)\)`)
@@ -35,27 +39,43 @@ func Parse(markdown io.Reader) {
         log.Fatal(err)
     }
 
+    var documentTitle string
+    var b strings.Builder
     for i, section := range sections {
-        output := parseSection(section, i)
-        fmt.Println(output)
+        output, title := parseSection(section, i)
+        if i == 0 {
+            documentTitle = title
+        }
+        b.WriteString(output)
     }
+    fmt.Printf(template, documentTitle, b.String())
 }
 
-func parseSection(section []string, i int) string {
+func parseSection(section []string, i int) (string, string) {
     title := parseTitle(section[0])
-    return fmt.Sprintf(`<div id="%d"><h1>%s</h1><section>%s</section></div>`, i, title, parseRest(section[1:]))
+    return fmt.Sprintf(`<div id="%d"><h1>%s</h1><section>%s</section></div>`, i, title, parseRest(section[1:])), title
 }
 
 func parseRest(section []string) string {
     var b strings.Builder
     for _, line := range section {
+        if len(line) == 0 {
+            continue
+        }
+        isListItem := false
         line = imageRegex.ReplaceAllString(line, `<img src="$2" alt="$1"/>`)
         line = linkRegex.ReplaceAllString(line, `<a href="$2">$1</a>`)
-        line = listItemRegex.ReplaceAllString(line, `<li>$1</li>`)
         line = boldRegex.ReplaceAllString(line, `<strong>$1</strong>`)
         line = italicRegex.ReplaceAllString(line, `<em>$1</em>`)
         line = codeRegex.ReplaceAllString(line, `<pre>$1</pre>`)
-        b.WriteString(fmt.Sprintf("<p>%s</p>", line))
+        if listItemRegex.MatchString(line) {
+            line = listItemRegex.ReplaceAllString(line, "<ul><li>$1</li></ul>") // I don't like this any more than you do.
+            isListItem = true
+        }
+        b.WriteString(fmt.Sprintf("<span>%s</span>", line))
+        if !isListItem {
+            b.WriteString("<br>")
+        }
     }
     return b.String()
 }
