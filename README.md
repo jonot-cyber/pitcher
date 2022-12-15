@@ -15,11 +15,12 @@ Pitcher is a (bad) program to create a presentation from a markdown file. Featur
   - Bold
   - Italics
   - Code
+  - Nested bulleted lists that don't work!
 - The horror!
 
 # The Horror
 
-While the code as it is fits my needs just fine, it isn't the cleanest. There are a lot of hacks that rely on how permissive browsers are with HTML errors, and some other hacks just to get around doing work.
+While the code as it is fits my needs just fine(ish), it isn't the cleanest. There are a lot of hacks that rely on how permissive browsers are with HTML errors, and some other hacks just to get around doing work.
 
 # Keybinds
 
